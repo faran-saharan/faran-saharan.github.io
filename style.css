@@ -1,0 +1,1343 @@
+/* colours I use everywhere */
+:root {
+  --ink: #1f2124;
+  --muted: #5d6168;
+  --paper: #f6f5f9;
+  --line: #dddbe4;
+  --accent: #e879f9;
+  --accent-dark: #d946ef;
+  --violet: #a78bfa;
+  --glow: linear-gradient(90deg, #a78bfa, #e879f9);
+  --night: #1b1922;
+  --panel: #29263a;
+  --mono: "JetBrains Mono", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Rubik", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  background-color: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: #a21caf;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.2;
+}
+
+/* stops the sliding-in pictures from making the page scroll sideways on phones */
+main {
+  overflow-x: clip;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+/* coloured bar at the very top that fills up as you scroll */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-image: var(--glow);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 50;
+}
+
+/* ---------- moving grid (used on the dark parts) ---------- */
+.grid-bg {
+  position: absolute;
+  inset: -64px;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: drift 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  to {
+    background-position: 32px 32px;
+  }
+}
+
+/* ---------- top part ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--night);
+  color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero .grid-bg {
+  /* moves a little with the mouse, set from script.js */
+  translate: var(--px, 0) var(--py, 0);
+}
+
+.doodle {
+  position: absolute;
+  fill: none;
+  stroke: rgba(232, 121, 249, 0.35);
+  stroke-width: 1.5;
+  pointer-events: none;
+  animation: float 9s ease-in-out infinite;
+}
+
+.doodle path {
+  fill: rgba(232, 121, 249, 0.35);
+}
+
+.doodle text {
+  fill: rgba(232, 121, 249, 0.6);
+  stroke: none;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.d1 { width: 130px; top: 18%; left: 4%; }
+.d2 { width: 220px; bottom: 14%; left: 38%; animation-delay: -3s; }
+.d3 { width: 120px; top: 14%; right: 5%; animation-delay: -6s; }
+
+@keyframes float {
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+
+.cross-x,
+.cross-y {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(232, 121, 249, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cross-x {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.cross-y {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.coords {
+  position: absolute;
+  z-index: 5;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  background-color: rgba(27, 25, 34, 0.85);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hero.aiming .cross-x,
+.hero.aiming .cross-y,
+.hero.aiming .coords {
+  opacity: 1;
+}
+
+.hero nav,
+.desk {
+  width: 100%;
+}
+
+.hero nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  z-index: 2;
+}
+
+.logo {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links a {
+  margin-left: 26px;
+  color: #c4c6c9;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* the "desk" holds the two windows and the fake cursor */
+.desk {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 100px;
+  z-index: 2;
+}
+
+/* ---------- windows ---------- */
+.window {
+  background-color: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: #9aa0a6;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dots i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #4a4658;
+}
+
+.dots i:first-child {
+  background-color: var(--accent);
+}
+
+.win-body {
+  padding: 34px 36px 38px;
+}
+
+.prompt {
+  font-family: var(--mono);
+  color: var(--accent);
+  margin: 0 0 6px;
+  min-height: 1.6em;
+}
+
+h1 {
+  font-size: 68px;
+  font-weight: 800;
+  margin: 0 0 16px;
+}
+
+.sub {
+  font-size: 19px;
+  color: #d4d6d9;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* blinking line at the end of whatever is being typed */
+.typing::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -0.1em;
+  background-color: var(--accent);
+  animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.photo-win {
+  justify-self: center;
+  width: 300px;
+}
+
+/* starts crooked and off to the side, the cursor drags it into place */
+.js .photo-win {
+  transform: translate(90px, 70px) rotate(7deg);
+}
+
+.js .photo-win.placed {
+  transform: none;
+}
+
+.photo-win img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* things that only show up after the intro finishes */
+.js .after-intro {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.intro-done .after-intro {
+  opacity: 1;
+  transform: none;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  margin-left: -24px;
+  width: 48px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #9aa0a6;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.scroll-hint span {
+  width: 1px;
+  height: 34px;
+  background-color: var(--accent);
+  animation: drop 1.6s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes drop {
+  0% { transform: scaleY(0); }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- fake cursors ---------- */
+.fake-cursor,
+.tour-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+}
+
+.tour-cursor {
+  position: fixed;
+  z-index: 60;
+}
+
+.fake-cursor.on,
+.tour-cursor.on {
+  opacity: 1;
+}
+
+.fake-cursor svg,
+.tour-cursor svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--accent);
+  stroke: white;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35));
+  transition: transform 0.15s;
+}
+
+/* little ring when it "clicks" */
+.fake-cursor::after,
+.tour-cursor::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.clicking svg {
+  transform: scale(0.8);
+}
+
+.clicking::after {
+  animation: ripple 0.5s ease-out;
+}
+
+@keyframes ripple {
+  from {
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/* whatever the tour cursor clicks gives a little bounce */
+.poked {
+  animation: poke 0.4s;
+}
+
+@keyframes poke {
+  50% {
+    transform: scale(0.94);
+  }
+}
+
+/* ---------- buttons ---------- */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background-color: var(--accent);
+  color: var(--ink);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.btn.outline {
+  background-color: transparent;
+  border-color: var(--ink);
+}
+
+.btn.outline:hover {
+  background-color: var(--ink);
+  color: white;
+}
+
+/* for buttons sitting on the dark background */
+.btn.light {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.6);
+  color: white;
+}
+
+.btn.light:hover {
+  background-color: white;
+  border-color: white;
+  color: var(--ink);
+}
+
+/* ---------- sections ---------- */
+.band {
+  position: relative;
+  padding: 100px 0;
+}
+
+.band.white {
+  background-color: white;
+}
+
+.band.dark {
+  background-color: var(--night);
+  color: white;
+  overflow: hidden;
+}
+
+h2 {
+  font-size: 44px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  min-height: 1.2em;
+}
+
+/* little square before every section title */
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 14px;
+  vertical-align: 0.15em;
+  background-image: var(--glow);
+  border-radius: 3px;
+}
+
+.section-intro {
+  color: var(--muted);
+  font-size: 18px;
+  margin: 0 0 56px;
+}
+
+.dark .section-intro {
+  color: #a9adb2;
+}
+
+.small-heading {
+  font-weight: 700;
+  margin: 18px 0 6px;
+}
+
+.list {
+  padding-left: 20px;
+  margin: 0 0 6px;
+}
+
+.list li {
+  margin-bottom: 6px;
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags li {
+  padding: 3px 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background-color: white;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.band.white .tags li {
+  background-color: var(--paper);
+  border-color: var(--paper);
+}
+
+.dark .tags li {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #c4c6c9;
+}
+
+/* ---------- about ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.big-text {
+  font-size: 21px;
+  margin: 18px 0 0;
+}
+
+.light-win {
+  position: relative;
+  background-color: white;
+  border-color: var(--line);
+  box-shadow: 0 24px 50px rgba(31, 33, 36, 0.12);
+  overflow: visible;
+}
+
+.light-win .win-bar {
+  background-color: var(--paper);
+  border-bottom-color: var(--line);
+  color: var(--muted);
+  border-radius: 12px 12px 0 0;
+}
+
+.light-win .win-body {
+  padding: 24px 26px 26px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.field {
+  display: block;
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #fafaf8;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field.focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232, 121, 249, 0.2);
+}
+
+.form-end {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.save {
+  padding: 7px 20px;
+  border-radius: 6px;
+  background-color: var(--ink);
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.save.done {
+  background-color: #2f8a4a;
+}
+
+/* ---------- coding projects ---------- */
+.project {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 110px;
+}
+
+.project:last-child {
+  margin-bottom: 0;
+}
+
+/* every second project has the picture on the right */
+.project.flip > :first-child {
+  order: 2;
+}
+
+/* pictures lean towards the mouse, the angles come from script.js */
+.tilt {
+  display: block;
+  perspective: 900px;
+  margin: 0;
+}
+
+.tilt img {
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(31, 33, 36, 0.2);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s ease-out;
+}
+
+.project h3 {
+  font-size: 30px;
+  margin: 0 0 12px;
+}
+
+.project-text p {
+  margin-top: 0;
+}
+
+/* ---------- solidworks fixture ---------- */
+.fixture h3 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.where {
+  color: #a9adb2;
+  margin: 4px 0 14px;
+}
+
+.fixture-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+.fixture-top p {
+  margin-top: 0;
+}
+
+.title-block {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+}
+
+.title-block th,
+.title-block td {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 7px 12px;
+  text-align: left;
+}
+
+.title-block th {
+  width: 40%;
+  font-weight: 400;
+  color: #a9adb2;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.title-block td {
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.assembly {
+  margin: 0;
+}
+
+.assembly-frame {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.assembly-frame img {
+  width: 100%;
+}
+
+/* glowing line that sweeps down the assembly like a probe scanning it */
+.scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background-color: var(--accent);
+  box-shadow: 0 0 18px 6px rgba(232, 121, 249, 0.5);
+  opacity: 0;
+}
+
+.assembly.show .scan {
+  animation: scan 1.4s ease-in-out forwards;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.leaders {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.leaders line {
+  stroke: var(--accent);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.balloon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  line-height: 34px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background-color: white;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.balloon.lit {
+  background-color: var(--accent);
+}
+
+.assembly figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #a9adb2;
+}
+
+.parts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.part {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.part img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: #eef0f2;
+}
+
+.part span {
+  display: block;
+  padding: 8px 10px 10px;
+  font-size: 14px;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+}
+
+.part b {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.part:hover,
+.part.lit {
+  border-color: var(--accent);
+}
+
+.part.lit b {
+  background-color: var(--accent);
+}
+
+/* the real photo of the fixture */
+.final {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-top: 80px;
+}
+
+.final img {
+  width: 100%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+}
+
+.final h4 {
+  font-size: 26px;
+  margin: 0 0 6px;
+}
+
+.final-text p {
+  margin-top: 0;
+}
+
+.note {
+  margin: 50px 0 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #a9adb2;
+  font-size: 15px;
+}
+
+/* ---------- experience ---------- */
+.timeline {
+  position: relative;
+  margin-left: 8px;
+  padding-left: 36px;
+}
+
+/* grey track + coloured line that grows as you scroll (height set in script.js) */
+.timeline::before,
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  background-color: var(--line);
+  height: 100%;
+}
+
+.timeline::after {
+  background-image: linear-gradient(var(--violet), var(--accent));
+  height: var(--fill, 0%);
+}
+
+.job {
+  position: relative;
+  padding-bottom: 44px;
+}
+
+.job:last-child {
+  padding-bottom: 0;
+}
+
+/* the dot on the line */
+.job::before {
+  content: "";
+  position: absolute;
+  left: -45px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--paper);
+  border: 3px solid var(--accent-dark);
+  z-index: 1;
+  transition: background-color 0.5s 0.3s;
+}
+
+.job.show::before {
+  background-color: var(--accent-dark);
+}
+
+.job-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+.job h3 {
+  font-size: 21px;
+  margin: 0;
+}
+
+.when {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.company {
+  color: var(--muted);
+  margin: 2px 0 10px;
+}
+
+/* ---------- moving skills band ---------- */
+.ticker {
+  background-image: linear-gradient(90deg, #8b5cf6, #e879f9 50%, #f472b6);
+  overflow: hidden;
+  padding: 20px 0;
+  transform: rotate(-1.5deg);
+  margin: -10px -20px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 14px 30px rgba(139, 92, 246, 0.3);
+}
+
+.ticker-row {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: slide 32s linear infinite;
+}
+
+.ticker span {
+  font-family: "Unbounded", "Rubik", sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--night);
+  padding: 0 26px;
+  white-space: nowrap;
+}
+
+/* some words are just an outline */
+.ticker .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px white;
+}
+
+/* little spinning stars between the words */
+.ticker i {
+  font-style: normal;
+  font-size: 22px;
+  color: white;
+  display: inline-block;
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- education + skills ---------- */
+.edu-skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 44px;
+}
+
+.school h3 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.edu-skills .small-heading:first-child {
+  margin-top: 0;
+}
+
+/* ---------- bottom ---------- */
+footer {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0 40px;
+  background-color: var(--night);
+  color: white;
+  text-align: center;
+}
+
+footer h2 {
+  margin-bottom: 8px;
+}
+
+footer p {
+  color: #c4c6c9;
+  margin: 0 0 12px;
+}
+
+.email {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+footer .buttons {
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.made {
+  font-size: 14px;
+}
+
+/* ---------- popup for the bigger picture ---------- */
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: min(1000px, 92vw);
+  text-align: center;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#viewer-img {
+  max-height: 75vh;
+  margin: 0 auto;
+}
+
+#viewer-text {
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* ---------- scroll reveals ---------- */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.js .reveal.from-left {
+  transform: translateX(-50px);
+}
+
+.js .reveal.from-right {
+  transform: translateX(50px);
+}
+
+.js .reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* the part pictures come in one after another */
+.js .parts.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js .parts .part {
+  --wait: 0s; /* changed below so each part comes in a bit after the last one */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--wait), transform 0.5s var(--wait), border-color 0.2s;
+}
+
+.js .parts.show .part {
+  opacity: 1;
+  transform: none;
+}
+
+.parts .part:nth-child(2) { --wait: 0.05s; }
+.parts .part:nth-child(3) { --wait: 0.1s; }
+.parts .part:nth-child(4) { --wait: 0.15s; }
+.parts .part:nth-child(5) { --wait: 0.2s; }
+.parts .part:nth-child(6) { --wait: 0.25s; }
+.parts .part:nth-child(7) { --wait: 0.3s; }
+.parts .part:nth-child(8) { --wait: 0.35s; }
+.parts .part:nth-child(9) { --wait: 0.4s; }
+.parts .part:nth-child(10) { --wait: 0.45s; }
+.parts .part:nth-child(11) { --wait: 0.5s; }
+
+/* on the assembly: scan line goes first, then the lines draw in and the numbers pop up 1 to 6 */
+.js .assembly .leaders line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 0.8s ease-out 1.2s;
+}
+
+.js .assembly.show .leaders line {
+  stroke-dashoffset: 0;
+}
+
+.js .assembly .balloon {
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+
+.js .assembly.show .balloon {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.assembly .balloon[data-part="1"] { transition-delay: 1.5s; }
+.assembly .balloon[data-part="2"] { transition-delay: 1.65s; }
+.assembly .balloon[data-part="3"] { transition-delay: 1.8s; }
+.assembly .balloon[data-part="4"] { transition-delay: 1.95s; }
+.assembly .balloon[data-part="5"] { transition-delay: 2.1s; }
+.assembly .balloon[data-part="6"] { transition-delay: 2.25s; }
+
+/* ---------- if someone has reduce motion turned on, skip all of it ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js .reveal,
+  .js .parts .part,
+  .js .after-intro {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .photo-win {
+    transform: none;
+  }
+
+  .js .assembly .leaders line {
+    stroke-dashoffset: 0;
+  }
+
+  .js .assembly .balloon {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ---------- tablets and phones ---------- */
+@media (max-width: 860px) {
+  .desk,
+  .about,
+  .project,
+  .fixture-top,
+  .final,
+  .edu-skills {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .desk {
+    padding-bottom: 90px;
+  }
+
+  .photo-win {
+    width: 200px;
+    justify-self: start;
+    order: -1;
+  }
+
+  .js .photo-win {
+    transform: translate(40px, 30px) rotate(6deg);
+  }
+
+  .win-body {
+    padding: 24px 22px 26px;
+  }
+
+  .project.flip > :first-child {
+    order: 0;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  .band {
+    padding: 70px 0;
+  }
+
+  .project {
+    margin-bottom: 70px;
+  }
+
+  .parts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .balloon {
+    width: 28px;
+    height: 28px;
+    line-height: 24px;
+    font-size: 14px;
+  }
+
+  .doodle {
+    opacity: 0.5;
+  }
+
+  .ticker span {
+    font-size: 22px;
+    padding: 0 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    padding: 0 16px;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .hero nav {
+    justify-content: center;
+  }
+
+  .nav-links a {
+    margin: 0 7px;
+    font-size: 15px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .email {
+    font-size: 21px;
+  }
+
+  .timeline {
+    padding-left: 26px;
+  }
+
+  .job::before {
+    left: -35px;
+  }
+
+  .d2 {
+    display: none;
+  }
+}

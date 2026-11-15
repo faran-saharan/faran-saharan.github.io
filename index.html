@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faran Saharan</title>
+  <meta name="description" content="Faran Saharan - Engineering Systems and Computing student at the University of Guelph.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&family=Unbounded:wght@800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+  <div class="progress"></div>
+
+  <!-- the cursor that flies around and clicks things while you scroll -->
+  <div class="tour-cursor" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M3 2l7 19 2.5-7.5L20 11z"/></svg>
+  </div>
+
+  <header class="hero" id="top">
+    <div class="grid-bg"></div>
+
+    <!-- little drawing dimensions floating in the background -->
+    <svg class="doodle d1" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="34"/>
+      <line x1="10" y1="60" x2="110" y2="60"/>
+      <line x1="60" y1="10" x2="60" y2="110"/>
+      <text x="74" y="22">&Oslash; 68</text>
+    </svg>
+    <svg class="doodle d2" viewBox="0 0 220 60" aria-hidden="true">
+      <line x1="10" y1="30" x2="210" y2="30"/>
+      <path d="M10 30l10-5v10z M210 30l-10-5v10z"/>
+      <line x1="10" y1="10" x2="10" y2="50"/>
+      <line x1="210" y1="10" x2="210" y2="50"/>
+      <text x="88" y="22">120.00</text>
+    </svg>
+    <svg class="doodle d3" viewBox="0 0 120 120" aria-hidden="true">
+      <line x1="10" y1="110" x2="110" y2="110"/>
+      <line x1="10" y1="110" x2="80" y2="30"/>
+      <path d="M60 110 A50 50 0 0 0 43 72" fill="none"/>
+      <text x="64" y="90">0.0&deg;</text>
+    </svg>
+
+    <!-- crosshair + coordinates that follow the mouse, like a CMM readout -->
+    <div class="cross-x" aria-hidden="true"></div>
+    <div class="cross-y" aria-hidden="true"></div>
+    <p class="coords" aria-hidden="true">x 0000 y 0000</p>
+
+    <nav class="wrap">
+      <a href="#top" class="logo">Faran Saharan</a>
+      <div class="nav-links">
+        <a href="#coding">Coding</a>
+        <a href="#solidworks">SolidWorks</a>
+        <a href="#experience">Experience</a>
+        <a href="resume.pdf">Resume</a>
+      </div>
+    </nav>
+
+    <div class="wrap desk">
+      <div class="window intro-win">
+        <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span>hello.txt</div>
+        <div class="win-body">
+          <p class="prompt" data-type>&gt; hello, my name is</p>
+          <h1 data-type>Faran Saharan.</h1>
+          <p class="sub" data-type>Engineering Systems and Computing student at the University of Guelph, specializing in mechatronics.</p>
+          <div class="buttons after-intro">
+            <a href="resume.pdf" class="btn">My resume</a>
+            <a href="https://github.com/faran-saharan" class="btn light">GitHub</a>
+            <a href="https://www.linkedin.com/in/faran-saharan-593712241" class="btn light">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="window photo-win">
+        <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span>me.jpg</div>
+        <img src="images/headshot.jpg" alt="Faran Saharan">
+      </div>
+
+      <div class="fake-cursor" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 2l7 19 2.5-7.5L20 11z"/></svg>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-hint after-intro">scroll<span></span></a>
+  </header>
+
+  <main>
+
+    <!-- about -->
+    <section id="about" class="band">
+      <div class="wrap about">
+        <div>
+          <h2 data-type>About me</h2>
+          <p class="big-text">
+            I'm a 4th year Engineering Systems and Computing student at the University of Guelph,
+            specializing in mechatronics. I've done co-ops in robotics software, factory automation
+            and quality.
+          </p>
+          <p class="big-text">Here are some of the things I've built and the places I've worked.</p>
+        </div>
+
+        <div class="window light-win profile">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span>profile.form</div>
+          <div class="win-body">
+            <div class="row"><span class="label">Name</span><span class="field">Faran Saharan</span></div>
+            <div class="row"><span class="label">Program</span><span class="field">B.Eng. Engineering Systems and Computing</span></div>
+            <div class="row"><span class="label">School</span><span class="field">University of Guelph, 4th year</span></div>
+            <div class="row"><span class="label">Email</span><span class="field">fsaharan@uoguelph.ca</span></div>
+            <div class="form-end"><span class="save">Save</span></div>
+          </div>
+          <div class="fake-cursor" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 2l7 19 2.5-7.5L20 11z"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- coding -->
+    <section id="coding" class="band white">
+      <div class="wrap">
+        <h2 data-type>Coding projects</h2>
+        <p class="section-intro">Small things I built to learn, both run right in the browser.</p>
+
+        <article class="project">
+          <div class="tilt reveal from-left">
+            <img src="images/rock-paper-scissors.jpg" alt="The rock paper scissors game reading my hand as scissors and beating the computer's paper" class="shot">
+          </div>
+          <div class="project-text reveal">
+            <h3>Rock Paper Scissors vs AI</h3>
+            <ul class="tags">
+              <li>JavaScript</li>
+              <li>TensorFlow.js</li>
+              <li>Teachable Machine</li>
+            </ul>
+            <p>
+              A rock paper scissors game you play with your webcam. I trained an image model in
+              Teachable Machine with 350+ photos for each class (rock, paper, scissors and "nothing"),
+              then built the game around it in JavaScript. The model reads your hand on every frame,
+              there's a 3-2-1 countdown, and whatever it sees at "Shoot!" is your move. First to 3 wins.
+            </p>
+            <p class="small-heading">Problems I had to solve</p>
+            <ul class="list">
+              <li>Predictions kept coming back as NaN. The newest library versions didn't work with my exported model, so I pinned older ones.</li>
+              <li>The first model only ever guessed rock. I retrained it with photos at more angles and distances.</li>
+              <li>It only counts a guess if the model is over 60% sure, so a blurry hand doesn't count as a move.</li>
+            </ul>
+            <div class="buttons">
+              <a href="https://github.com/faran-saharan/rock-paper-scissors" class="btn" data-tour>View the code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project flip">
+          <a href="https://faran-saharan.github.io/robot-arm-simulator/" class="tilt reveal from-right">
+            <img src="images/robot-arm.jpg" alt="The robot arm simulator with the arm reaching inside its blue reach circle" class="shot">
+          </a>
+          <div class="project-text reveal">
+            <h3>Robot Arm Simulator</h3>
+            <ul class="tags">
+              <li>JavaScript</li>
+              <li>HTML canvas</li>
+              <li>Kinematics</li>
+            </ul>
+            <p>
+              A two-joint robot arm that runs in the browser. Move your mouse and the arm reaches for it,
+              or drag the sliders to set the joint angles yourself.
+            </p>
+            <ul class="list">
+              <li><b>Inverse kinematics</b> works out the joint angles to reach the mouse, using the law of cosines.</li>
+              <li><b>Forward kinematics</b> works out where the tip ends up from the slider angles.</li>
+              <li>You can change the link lengths, and flip the elbow to reach the same point the other way.</li>
+              <li>Unit tests check the math and run automatically on GitHub.</li>
+            </ul>
+            <div class="buttons">
+              <a href="https://faran-saharan.github.io/robot-arm-simulator/" class="btn" data-tour>Try it</a>
+              <a href="https://github.com/faran-saharan/robot-arm-simulator" class="btn outline">View the code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- solidworks -->
+    <section id="solidworks" class="band dark">
+      <div class="grid-bg"></div>
+      <div class="wrap">
+        <h2 data-type>SolidWorks projects</h2>
+        <p class="section-intro">Parts I designed, drew up for the machine shop, and then built.</p>
+
+        <article class="fixture">
+          <div class="fixture-top">
+            <div class="reveal">
+              <h3>CMM Inspection Fixture</h3>
+              <p class="where">Co-op at Camcor Manufacturing (Linamar)</p>
+              <p>
+                The quality team had a new drivetrain unit to check on the CMM, but nothing to hold it with,
+                so parts couldn't be measured and shipped to the customer quickly. I designed a fixture that
+                holds the unit level with zero tilt and leaves every surface open for the CMM probe.
+              </p>
+            </div>
+
+            <!-- set up like the title block on an engineering drawing -->
+            <table class="title-block reveal">
+              <tr><th>Part</th><td>CMM inspection fixture</td></tr>
+              <tr><th>Material</th><td>Aluminum</td></tr>
+              <tr><th>Parts</th><td>6 different parts</td></tr>
+              <tr><th>Tilt</th><td>0&deg;</td></tr>
+              <tr><th>Designed by</th><td>F. Saharan</td></tr>
+              <tr><th>Built by</th><td>F. Saharan</td></tr>
+            </table>
+          </div>
+
+          <figure class="assembly reveal">
+            <div class="assembly-frame">
+              <img src="images/fixture/assembly.jpg" alt="SolidWorks assembly of the fixture with its 6 parts numbered">
+              <div class="scan" aria-hidden="true"></div>
+              <svg class="leaders" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <line x1="12" y1="82" x2="21" y2="73"/>
+                <line x1="20" y1="38" x2="31" y2="52"/>
+                <line x1="40" y1="10" x2="49.5" y2="19"/>
+                <line x1="64" y1="88" x2="69" y2="70"/>
+                <line x1="90" y1="30" x2="78" y2="44"/>
+                <line x1="49" y1="92" x2="41.5" y2="70.5"/>
+                <line x1="49" y1="92" x2="57" y2="60"/>
+              </svg>
+              <span class="balloon" data-part="1" style="left: 12%; top: 82%">1</span>
+              <span class="balloon" data-part="2" style="left: 20%; top: 38%">2</span>
+              <span class="balloon" data-part="3" style="left: 40%; top: 10%">3</span>
+              <span class="balloon" data-part="4" style="left: 64%; top: 88%">4</span>
+              <span class="balloon" data-part="5" style="left: 90%; top: 30%">5</span>
+              <span class="balloon" data-part="6" style="left: 49%; top: 92%">6</span>
+            </div>
+            <figcaption>The full assembly in SolidWorks. The numbers match the parts below. Click a part to see it bigger.</figcaption>
+          </figure>
+
+          <div class="parts reveal">
+            <button class="part" data-part="1"><img src="images/fixture/base-plate-top.jpg" alt="Base plate, top view"><span><b>1</b> Base plate, top</span></button>
+            <button class="part" data-part="1"><img src="images/fixture/base-plate.jpg" alt="Base plate"><span><b>1</b> Base plate</span></button>
+            <button class="part" data-part="2"><img src="images/fixture/radius-nest.jpg" alt="Radius nest block"><span><b>2</b> Radius nest block</span></button>
+            <button class="part" data-part="2"><img src="images/fixture/radius-nest-iso.jpg" alt="Radius nest block, tapped side holes"><span><b>2</b> Radius nest, side holes</span></button>
+            <button class="part" data-part="3" data-tour><img src="images/fixture/v-block.jpg" alt="V-block upright"><span><b>3</b> V-block upright</span></button>
+            <button class="part" data-part="3"><img src="images/fixture/v-block-iso.jpg" alt="V-block upright, mounting face"><span><b>3</b> V-block, mounting face</span></button>
+            <button class="part" data-part="4"><img src="images/fixture/l-bracket-holes.jpg" alt="L-bracket, showing the through holes and the tapped holes underneath"><span><b>4</b> L-bracket, holes</span></button>
+            <button class="part" data-part="4"><img src="images/fixture/l-bracket-side.jpg" alt="L-bracket, side view"><span><b>4</b> L-bracket, side</span></button>
+            <button class="part" data-part="5"><img src="images/fixture/locator-strip-drawing.jpg" alt="Locator strip drawing view"><span><b>5</b> Locator strip drawing</span></button>
+            <button class="part" data-part="6"><img src="images/fixture/support-brace.jpg" alt="Support brace, used behind parts 2 and 3"><span><b>6</b> Support brace (x2)</span></button>
+            <button class="part" data-part="6"><img src="images/fixture/support-brace-face.jpg" alt="Support brace, flat face with mounting holes"><span><b>6</b> Support brace, flat face</span></button>
+          </div>
+
+          <div class="final">
+            <figure class="tilt reveal from-left">
+              <img src="images/fixture/fixture-final.jpg" alt="The finished aluminum fixture on a workbench">
+            </figure>
+            <div class="final-text reveal">
+              <h4>Final product, built by me</h4>
+              <p>It holds the motor on a surface parallel to the ground, at a 0&deg; angle.</p>
+
+              <p class="small-heading">Design</p>
+              <p>
+                I modelled every part and the full assembly in SolidWorks, then made the dimensioned 2D
+                drawings the machine shop worked from.
+              </p>
+              <ul class="tags">
+                <li>Spline sketches</li>
+                <li>Trim entities</li>
+                <li>Hole Wizard counterbores</li>
+                <li>Tapped holes</li>
+                <li>V-groove cut</li>
+                <li>Radius nest cut</li>
+                <li>Fillets</li>
+                <li>Assembly mates</li>
+                <li>2D drawings</li>
+              </ul>
+
+              <p class="small-heading">Build</p>
+              <p>Once the machined aluminum parts came in from my drawings, I assembled and fitted the fixture by hand.</p>
+
+              <p class="small-heading">Result</p>
+              <p>The unit sits level and the CMM can reach every part of it, so the quality team can measure parts and get them out to the customer.</p>
+            </div>
+          </div>
+
+          <p class="note">The production part isn't shown, for confidentiality. Fixture shared with Linamar's permission.</p>
+        </article>
+
+        <!-- template for another solidworks project, copy it out of this comment
+        <article class="project">
+          <div class="tilt reveal from-left">
+            <img src="images/PICTURE-NAME.jpg" alt="what the picture shows" class="shot">
+          </div>
+          <div class="project-text reveal">
+            <h3>Project name</h3>
+            <ul class="tags">
+              <li>SolidWorks</li>
+            </ul>
+            <p>What it is and what problem it solves.</p>
+            <ul class="list">
+              <li>SolidWorks features I used</li>
+              <li>Something I had to figure out</li>
+            </ul>
+          </div>
+        </article>
+        -->
+      </div>
+    </section>
+
+    <!-- experience -->
+    <section id="experience" class="band">
+      <div class="wrap">
+        <h2 data-type>Experience</h2>
+        <p class="section-intro">Four work terms so far, across software, automation and quality.</p>
+
+        <div class="timeline">
+          <div class="job reveal">
+            <div class="job-head">
+              <h3>Automation Engineer co-op</h3>
+              <p class="when">May - Aug 2026</p>
+            </div>
+            <p class="company">Camcor Manufacturing (Linamar), Guelph</p>
+            <ul class="list">
+              <li>Troubleshot and maintained the industrial robots on our production lines.</li>
+              <li>Designed a multi-part CMM inspection fixture in SolidWorks for a new drivetrain unit the quality team had no way to hold. It keeps the unit level with zero tilt and leaves every surface open to the CMM probe.</li>
+              <li>Made the 2D drawings the machine shop worked from, then assembled and fitted the aluminum fixture by hand once the parts came in.</li>
+              <li>Made visual work instructions so new operators could learn each station quickly.</li>
+            </ul>
+          </div>
+
+          <div class="job reveal">
+            <div class="job-head">
+              <h3>Software Developer co-op</h3>
+              <p class="when">Jan - Apr 2026</p>
+            </div>
+            <p class="company">ATS Life Sciences Systems, Cambridge</p>
+            <ul class="list">
+              <li>Analyzed software for high-speed robotic transport platforms written in Java, Python and C++.</li>
+              <li>Worked with 20+ engineers on root-cause investigations when the systems failed.</li>
+              <li>Built diagnostic and simulation features to help find and test problems.</li>
+              <li>Planned and tracked work in Agile sprints using Jira.</li>
+            </ul>
+          </div>
+
+          <div class="job reveal">
+            <div class="job-head">
+              <h3>Quality Assurance co-op</h3>
+              <p class="when">May - Aug 2025</p>
+            </div>
+            <p class="company">Skyjack (Linamar), Guelph</p>
+            <ul class="list">
+              <li>Inspected 100+ components against their 2D drawings using precision measuring tools.</li>
+              <li>Analyzed 1,000+ data points in Excel to find defect trends across product lines.</li>
+              <li>Set up KPI tracking and audit workflows with operators and supervisors.</li>
+            </ul>
+          </div>
+
+          <div class="job reveal">
+            <div class="job-head">
+              <h3>Research Assistant</h3>
+              <p class="when">May 2024 - Apr 2025</p>
+            </div>
+            <p class="company">Office of Teaching and Learning, University of Guelph</p>
+            <ul class="list">
+              <li>Rebuilt the office website in Drupal, and views went up 56% in six months.</li>
+              <li>Helped launch and run the Teaching with AI series: 17 sessions with 834 attendees.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- moving band of skills -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-row">
+        <span>Python</span><i>&#10022;</i><span class="outline">C++</span><i>&#10022;</i><span>SolidWorks</span><i>&#10022;</i><span class="outline">Java</span><i>&#10022;</i><span>JavaScript</span><i>&#10022;</i><span class="outline">AutoCAD</span><i>&#10022;</i><span>C</span><i>&#10022;</i><span class="outline">MATLAB</span><i>&#10022;</i><span>VHDL</span><i>&#10022;</i><span class="outline">SQL</span><i>&#10022;</i><span>Git</span><i>&#10022;</i>
+        <span>Python</span><i>&#10022;</i><span class="outline">C++</span><i>&#10022;</i><span>SolidWorks</span><i>&#10022;</i><span class="outline">Java</span><i>&#10022;</i><span>JavaScript</span><i>&#10022;</i><span class="outline">AutoCAD</span><i>&#10022;</i><span>C</span><i>&#10022;</i><span class="outline">MATLAB</span><i>&#10022;</i><span>VHDL</span><i>&#10022;</i><span class="outline">SQL</span><i>&#10022;</i><span>Git</span><i>&#10022;</i>
+      </div>
+    </div>
+
+    <!-- school + skills -->
+    <section id="skills" class="band white">
+      <div class="wrap">
+        <h2 data-type>Education and skills</h2>
+
+        <div class="edu-skills">
+          <div class="school reveal">
+            <h3>B.Eng. Engineering Systems and Computing</h3>
+            <p class="company">University of Guelph, mechatronics specialization, 2023 - present</p>
+            <p>Courses I liked: autonomous systems and robotics, real-time systems, digital systems design, microcomputer interfacing, data structures.</p>
+          </div>
+
+          <div class="reveal">
+            <p class="small-heading">Languages</p>
+            <ul class="tags">
+              <li>Python</li>
+              <li>C</li>
+              <li>C++</li>
+              <li>Java</li>
+              <li>JavaScript</li>
+              <li>SQL</li>
+              <li>HTML/CSS</li>
+              <li>VHDL</li>
+              <li>MATLAB</li>
+            </ul>
+            <p class="small-heading">Tools</p>
+            <ul class="tags">
+              <li>SolidWorks</li>
+              <li>AutoCAD</li>
+              <li>Git</li>
+              <li>VS Code</li>
+              <li>IntelliJ</li>
+              <li>Jira</li>
+              <li>Confluence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid-bg"></div>
+    <div class="wrap">
+      <h2 data-type>Let's talk</h2>
+      <p>Email is the best way to reach me.</p>
+      <a href="mailto:fsaharan@uoguelph.ca" class="email">fsaharan@uoguelph.ca</a>
+      <div class="buttons">
+        <a href="https://www.linkedin.com/in/faran-saharan-593712241" class="btn">LinkedIn</a>
+        <a href="https://github.com/faran-saharan" class="btn light">GitHub</a>
+      </div>
+      <p class="made">Made by me with HTML, CSS and JavaScript.</p>
+    </div>
+  </footer>
+
+  <dialog id="viewer">
+    <img id="viewer-img" alt="">
+    <p id="viewer-text"></p>
+    <button id="close" class="btn">Close</button>
+  </dialog>
+
+  <script src="fixture.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
